@@ -43,6 +43,9 @@ case "$1" in
 	clean )
 		clean
 		;;
+	stop )
+		stop
+		;;
 	* )
 		echo "bad usage"
 		exit
