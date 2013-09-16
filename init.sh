@@ -5,7 +5,8 @@ TMP_PATH="/tmp/html_test_env"
 function mkdircd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
 
 function init () {
-	
+	[[ -a "/tmp/html_test_env" ]] && exit
+
 	mkdircd "$TMP_PATH/css" && touch main.css
 	mkdircd "$TMP_PATH/img"
 	mkdircd "$TMP_PATH/js" && touch main.js
@@ -17,13 +18,17 @@ function init () {
 }
 
 function run () {
-	cd "$TMP_PATH"
-	python -m SimpleHTTPServer 8008
+	cd "$TMP_PATH"	
+	python -m SimpleHTTPServer 8008 &  #run as a deamon
 }
 
 function clean () {
 	cd
-	rm -rf "$TMP_PATH"
+	rm -rf "$TMP_PATH" 2> /dev/null
+}
+
+function stop () {
+	kill $(ps aux | grep "[S]impleHTTPServer 8008" | awk '{print $2}') 2> /dev/null
 }
 
 [ -z "$1" ] && init && run && exit
