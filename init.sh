@@ -19,7 +19,7 @@ function init () {
 
 function run () {
 	cd "$TMP_PATH"	
-	python -m SimpleHTTPServer 8008 & > "$TMP_PATH/logs" 2> "$TMP_PATH/logs_errors"  #run as a deamon
+	python -m SimpleHTTPServer 8008 > "$TMP_PATH/logs" 2> "$TMP_PATH/logs_errors" &  #run as a deamon
 }
 
 function clean () {
