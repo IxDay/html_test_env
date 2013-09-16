@@ -23,7 +23,7 @@ function run () {
 }
 
 function clean () {
-	cd
+	cd "$HOME"
 	rm -rf "$TMP_PATH" 2> /dev/null
 }
 
